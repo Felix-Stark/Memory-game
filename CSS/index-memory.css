@@ -57,6 +57,7 @@ body {
    display: none;
    align-items: center;
    justify-content: center;
+   transition-delay: 1000ms;
 }
 
 .overlay h1 {
