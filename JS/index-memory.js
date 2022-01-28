@@ -35,4 +35,3 @@ function theGame(card) {
    console.log('antal flips: ', flipCounter);
 }
 
-
