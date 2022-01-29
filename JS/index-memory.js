@@ -12,6 +12,16 @@ let cardsToCompare = [];
 let firstDraw = cardsToCompare[0];
 let secondDraw = cardsToCompare[1];
 
+let shuffleButton = document.querySelector('.shuffle-btn').addEventListener('click', ()=> {shuffleCards(shuffle)});
+
+function shuffleCards() {
+   //let cardArr = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8];
+ 
+   for (let i = cardsParent.children.length; i >= 0; i--) {
+      cardsParent.appendChild(cardsParent.children[Math.random() * i | 0]);
+   }
+}
+
 
 // eventlistener 'click'. sends card to function flip(card)
 for(i = 0; i < cardsElem.length; i++) {
@@ -19,9 +29,7 @@ for(i = 0; i < cardsElem.length; i++) {
    
    card.addEventListener('click', ()=> {theGame(card)});
 }
-// , cardsToCompare.push(card.attributes[1].value)
 
-// apply class="flip" on clicked card. send flipped cards value to function compareCards
 function theGame(card) {
    card.classList.toggle("flip");
    flipCounter++;
@@ -29,7 +37,6 @@ function theGame(card) {
    if(flipCounter > 0 && flipCounter < 3) {
       cardsToCompare.push(card.attributes[1].value);
    }
-   if(cardsToCompare)
    
    console.log(cardsToCompare)
    console.log('antal flips: ', flipCounter);
