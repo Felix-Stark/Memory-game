@@ -1,4 +1,5 @@
 const cardsElem = document.querySelectorAll('.memory-card');
+const cardsParent = document.querySelector('.memory-cards');
 const frontElem = document.querySelectorAll('.front');
 const backElem = document.querySelectorAll('.back');
 const overlayElem = document.querySelector('.overlay');
@@ -36,6 +37,39 @@ function theGame(card) {
    
    if(flipCounter > 0 && flipCounter < 3) {
       cardsToCompare.push(card.attributes[1].value);
+   }
+
+   if(flipCounter == 2){
+      if(cardsToCompare[0] == cardsToCompare[1]){
+
+         let cardValue = card.attributes[1].value;
+
+         let cardElement = document.querySelectorAll(`[data-card="${cardValue}"]`);
+
+         for(i = 0; i < cardElement.length; i++) {
+            let element = cardElement[i];
+
+            element.classList.toggle('hide');
+         }
+
+         flipCounter = 0;
+         cardsToCompare = [];
+      }
+      else{
+
+         let cardElement = document.querySelectorAll(`.flip`);
+
+         setTimeout(function(){
+            for(i = 0; i < cardElement.length; i++) {
+               let element = cardElement[i];
+
+               element.classList.toggle('flip');
+            }
+         },1000);
+
+         flipCounter = 0;
+         cardsToCompare = [];
+      }
    }
    
    console.log(cardsToCompare)
