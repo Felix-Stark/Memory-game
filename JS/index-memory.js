@@ -5,22 +5,40 @@ const backElem = document.querySelectorAll('.back');
 const overlayElem = document.querySelector('.overlay');
 const closeElem = document.querySelector('.close');
 const shuffleButton = document.querySelector('.shuffle-btn');
+const resetElem = document.querySelector('.reset');
+const resetButton = document.querySelector('.reset-button')
 
 let flipCounter = 0;
 let pairCounter = '';
 let shuffleCounter = '';
 let cardsToCompare = [];
-let firstDraw = cardsToCompare[0];
-let secondDraw = cardsToCompare[1];
 
 
-shuffleButton.addEventListener('click', () => {shuffleCards()});
+shuffleButton.addEventListener('click', ()=> {shuffleCards()});
 
 closeElem.addEventListener('click', ()=> {closeOverlay()});
-   
+
 function closeOverlay() {
+   
+
    overlayElem.classList.toggle('show');
+   resetElem.classList.toggle('show');
+   resetButton.addEventListener('click', ()=> {newGame(resetElem)});
 }
+
+function newGame() {
+   flipCounter = 0;
+   cardsToCompare = [];
+   pairCounter = '';
+   shuffleCounter = '';
+
+   for (i = 0; i < cardsElem.length; i++){
+      let resetCards = cardsElem[i];
+      resetElem.classList.toggle('show');
+      resetCards.classList.toggle('hide', 'flip');
+   }
+}
+
 
 function shuffleCards(shuffled) {
    for (i = cardsParent.children.length; i >= 0; i--) {
@@ -37,8 +55,10 @@ for(i = 0; i < cardsElem.length; i++) {
    let card = cardsElem[i];
 
    card.addEventListener('click', ()=> {theGame(card)});
+   
 }
-
+//---------------------------------------------------------
+//START MEMORY-GAME
 function theGame(card) {
 
    card.classList.toggle("flip");
@@ -83,7 +103,7 @@ function theGame(card) {
          cardsToCompare = [];
       }
    }
-   if (pairCounter == 8) {
+   if (pairCounter > 7) {
       overlayElem.classList.toggle('show');
    }
 
